@@ -1,0 +1,21 @@
+Narrow down scope of project.
+	Answering complex questions vs having more entities
+	Eliminating certain aspects. Fire tolerance? Disaster records? Dispersal?
+	Max can make it to Carlos's office hours on Friday only, will ask for feedback.
+
+Finalizing our ER model and DB plan
+
+Get comfortable with git
+
+Choosing application technology (MySQL)
+	PHP
+	Flask
+	.NET Core
+
+Application Design
+	Any attempt to work on a relatively realistic scale will require good data insertion techniques
+		Usability, Efficiency
+	One forest per instance? More could help our grade?
+	No text box in favor of limitied functions
+		slecect forest, select operations to perform. 
+
