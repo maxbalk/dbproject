@@ -12,8 +12,8 @@ create table forest (
 
 create table Forest_location (
     Forest_name varchar(40),
-    country varchar(40),
-    primary key (Forest_name)
+    Forest_location varchar(40),
+    primary key (Forest_name, Forest_location)
 );
 
 create table Climate (
