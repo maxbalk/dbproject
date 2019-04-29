@@ -40,12 +40,11 @@ create table Tree_species (
     primary key (Scientific_name)
 );
 
-create table contains_species (
+create table Contains_species (
     Species_name varchar(40),
     cell_id int(11),
-    Forest_name varchar(40),
     year_recorded YEAR(4),
     count int(10),
-    primary key (Species_name, cell_id, Forest_name)
+    primary key (Species_name, cell_id)
 );
 
