@@ -54,3 +54,8 @@ alter table Cell add constraint fk_cell_climate foreign key (Climate_name) refer
 alter table Contains_species add constraint fk_species_relation foreign key (Species_name) references Tree_species (Scientific_name);
 alter table Contains_species add constraint fk_cell_relation foreign key (cell_id) references Cell (id);
 
+create user 'forestManager'@'localhost'
+    identified by 'AUPW1234';
+grant select, insert, update, delete
+    on *.*
+    to 'appuser'@'localhost';
