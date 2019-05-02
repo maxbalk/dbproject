@@ -9,8 +9,8 @@
         echo "test route";
     }
     else {
-        require 'routers/HomeRouter.php';
-        $router = new homepage\router();
+        require_once('routers/HomeRouter.php');
+        $router = new router();
         $router->processRequest($action);
-    }
+    } 
 ?>
