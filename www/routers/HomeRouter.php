@@ -1,6 +1,7 @@
 <?
 namespace homepage;
 
+require_once(ROOT.'/views/homepage.php');
 require_once(ROOT.'/controllers/HomeController.php');
 require_once(ROOT.'/models/Forest.php');
 require_once(ROOT.'adapter.php');
@@ -10,13 +11,18 @@ require_once(ROOT.'adapter.php');
 //one controller per view but possibly several entities
 class router{
 
-    private $homeController;
+    private $view;
+    private $controller;
     //the feature's router will handle dependencies for the mvc components.
     public function __construct(){
-        //$this->homeController = new 
+        $this->view = new Homepage();
+        $this->controller = new Controller($view);
     }
 
     public function processRequest($action){
-
+        if($action==''){
+            $forests = new Forest();
+            $controller->displayForests($forests);
+        }
     }
 }
