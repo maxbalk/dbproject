@@ -1,4 +1,4 @@
-<?php 
+<?php
     define("ROOT",$_SERVER["DOCUMENT_ROOT"]);
 
     // capture GET requests if provided. otherwise, set to " '' "
@@ -8,9 +8,20 @@
     if($route == 'test'){
         echo "test route";
     }
+
+    elseif($route == 'forestarea'){
+        echo "Forest Area Calculator\n\n";
+        require_once('forestarea.php');
+    }
+
+    elseif($route == 'coordinate_generator'){
+      require_once('coordgen.php');
+
+    }
+
     else {
         require_once('routers/HomeRouter.php');
         $router = new router();
         $router->processRequest($action);
-    } 
+    }
 ?>
