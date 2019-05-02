@@ -17,12 +17,4 @@ abstract class Adapter{
         return $pdo;
     }
 
-    public function crud($stmt){
-        if($stmt->execute() == TRUE) {
-            return 1;
-        }
-        return 0;
-    }
 }
-
-    

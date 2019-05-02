@@ -1,11 +1,8 @@
-<?
+<?php
 require_once(ROOT.'/Adapter.php');
 require_once('cell.php');
 
 class ForestAdapter extends Adapter{
-    public function __construct(){
-        echo "created adapter <br>";
-    }
 
     public function QinsertForest($name){
         $stmt = $this->conn->prepare("
@@ -22,10 +19,8 @@ class ForestAdapter extends Adapter{
           $yrange = (int)(($nlat - $slat)/5);
           $id = 1;
         }
-        retrun $row;
+        return $row;
     }
-
-
 }
 
 class Forest {
@@ -33,7 +28,7 @@ class Forest {
     private $adapter;
 
     public function __construct($adapter){
-        this->adapter = $adapter;
+        $this->$adapter = $adapter;
     }
 
     public function insertForest($name){
@@ -42,36 +37,30 @@ class Forest {
 
     private function generateCells(){
 
-          $result = $pdo->query($sql);
-          $row = $this->adapter->QgenerateCells();
+        $result = $pdo->query($sql);
+        $row = $this->adapter->QgenerateCells();
 
-          $name = $row['Official_name'];
-          $nlat = $row['Lat_north'];
-          $slat = $row['Lat_south'];
-          $elong = $row['Long_east'];
-          $wlong = $row['Long_west'];
+        $name = $row['Official_name'];
+        $nlat = $row['Lat_north'];
+        $slat = $row['Lat_south'];
+        $elong = $row['Long_east'];
+        $wlong = $row['Long_west'];
 
-          $xrange = (int)(($wlong - $elong)/5);
-          $yrange = (int)(($nlat - $slat(/5);
-          $id = 1;
+        $xrange = (int)(($wlong - $elong)/5);
+        $yrange = (int)(($nlat - $slat)/5);
+        $id = 1;
 
-          $cell = new Cell();
+        $cell = new Cell($adapter);
 
-          for ($x = 0; $x < $xrange; $x += 1){
-             for ($y = 0; $y < $yrange; $y += 1){
-                 $cell->newCell($id, $name, $x, $y);
-                 $id++;
-             }
-          }
+        for ($x = 0; $x < $xrange; $x += 1){
+           for ($y = 0; $y < $yrange; $y += 1){
+               $cell->newCell($id, $name, $x, $y);
+               $id++;
+           }
+        }
 
-            echo "Forests have been divided into coordinates";
+        echo "Forests have been divided into coordinates";
             // Free result set
-            unset($result);
-          }
-       }
-    }
-
-    public function calculateArea(){
-
+        unset($result);
     }
 }

@@ -2,13 +2,31 @@
 
 class CellAdapter extends Adapter{
 
-    public function __construct(){
-      echo "created adapter <br>";
-    }
-
     public function QinsertCells($id, $name, $xval, $yval){
       $stmt = $this->conn->prepare("INSERT INTO cell (id, Forest_name, X_coordinate, Y_coordinate) VALUES (?, ?, ?, ?)");
       $stmt->execute([$id, $name, $xval, $yval]);
+    }
+
+    public function QcellContains($id){
+      $species = array('Oak', 'Pine', 'Maple');
+      $stmt = $this->conn->prepare("INSERT INTO Contains_species (Species_name, cell_id, count) VALUES (?, ?, ?)");
+      $m = count($id);
+      $n = count($species);
+      for ($i = 0; $i < m; $i++){
+        for ($j = 0; $j < n; $j++){
+          $count = mt_rand(1, 100);
+          $stmt->execute([$species[i], $id[j], $count]);
+        }
+      }
+    }
+}
+
+    public function QgetIDs(){
+      $stmt = $this->conn->prepare("SELECT id FROM Cell WHERE Forest_name = 'Canada'");
+      $stmt->execute();
+      $result = $stmt->fetch(PDO::FETCH_ASSOC);
+      return $result;
+
     }
   }
 
@@ -18,14 +36,16 @@ class Cell{
   private $adapter;
 
   public __construct($adapter){
-    $this->adapter = $adapter;
+    $this->$adapter = $adapter;
   }
-
-  
 
   public function newCell($id, $name, $xval, $yval){
     $this->adapter->QinsertCells($id, $name, $xval, $yval);
+  }
 
+  public function cellConatains(){
+    $id = $this->adapter->QgetIDs();
+    $this->adapter->QcellContains($id);
   }
 }
 ?>

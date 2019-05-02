@@ -43,7 +43,6 @@ create table Tree_species (
 create table Contains_species (
     Species_name varchar(40),
     cell_id int(11),
-    year_recorded YEAR(4),
     count int(10),
     primary key (Species_name, cell_id)
 );
