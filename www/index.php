@@ -11,11 +11,11 @@
 
     elseif($route == 'forestarea'){
         echo "Forest Area Calculator\n\n";
-        require 'forestarea.php';
+        require_once('forestarea.php');
     }
 
     elseif($route == 'coordinate_generator'){
-      require 'coordgen.php';
+      require_once('coordgen.php');
 
     }
 
@@ -23,5 +23,5 @@
         require_once('routers/HomeRouter.php');
         $router = new router();
         $router->processRequest($action);
-    } 
+    }
 ?>

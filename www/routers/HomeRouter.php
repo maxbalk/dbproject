@@ -1,4 +1,4 @@
-<?
+<?php
 require_once(ROOT.'/views/Homepage.php');
 require_once(ROOT.'/controllers/HomeController.php');
 require_once(ROOT.'/models/Forest.php');
@@ -6,7 +6,7 @@ require_once(ROOT.'/models/Forest.php');
 //initializes controller and builds dependencies for the homepage view.
 //its possible a lot will be happening here
 //one controller per view but possibly several entities
-class router{
+class router {
 
     private $controller;
     //the feature's router will handle dependencies for the mvc components.
@@ -20,11 +20,19 @@ class router{
             $adapter = new ForestAdapter();
             $forests = new Forest($adapter);
             $this->controller->displayForests();
-        } 
+        }
         elseif($action=='new-forest'){
             //initialize POST data here
             $adapter = new ForestAdapter();
             $forests = new Forest($adapter);
+        }
+        elseif($action == 'cell'){
+            $adapter = new ForestAdapter();
+            $forests = new Forest($adapter);
+            $this->controller->forestArea();
+        }
+        elseif($action == 'cells'){
+          
         }
     }
 }

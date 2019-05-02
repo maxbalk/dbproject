@@ -19,12 +19,12 @@ try{
             $elong = $row['Long_east'];
             $wlong = $row['Long_west'];
 
-            $xrange = (int)$wlong - $elong;
-            $yrange = (int)$nlat - $slat;
+            $xrange = (int)(($wlong - $elong)/5);
+            $yrange = (int)(($nlat - $slat)/5);
             $id = 1;
 
-            for ($x = 0; $x < $xrange; $x += 5){
-              for ($y = 0; $y < $yrange; $y += 5){
+            for ($x = 0; $x < $xrange; $x += 1){
+              for ($y = 0; $y < $yrange; $y += 1){
                 $stmt->execute([$id, $name, $x, $y]);
                 $id++;
               }

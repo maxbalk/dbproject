@@ -1,4 +1,4 @@
-<?
+<?php
 class HomeController {
 
     private $view;
@@ -11,7 +11,12 @@ class HomeController {
     }
 
     public function newForest($forests){
-        
+
+    }
+
+    public function forestArea(){
+      $forest = new Forest;
+      $forest->generateCells();
     }
 
 }
