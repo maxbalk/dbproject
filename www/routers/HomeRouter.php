@@ -13,7 +13,7 @@ class router{
     private $homeController;
     //the feature's router will handle dependencies for the mvc components.
     public function __construct(){
-
+        //$this->homeController = new 
     }
 
     public function processRequest($action){
