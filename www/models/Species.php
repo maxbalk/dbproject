@@ -1,12 +1,13 @@
 <?
-require_once(ROOT.'/Adapter.php');
+namespace Species;
+require_once(ROOT.'/adapter.php');
 
 class SpeciesAdapter extends Adapter{
     public function __construct(){
         echo "created adapter <br>";
     }
     public function Qintialspecies(){
-        $stmt = $pdo->prepare("INSERT INTO Tree_species (Scientific_name, lifespan, Dispersal_distance, Fire_tolerance, DBH) VALUES (?, ?, ?, ?, ?);");
+        $stmt = $this->conn->prepare("INSERT INTO Tree_species (Scientific_name, lifespan, Dispersal_distance, Fire_tolerance, DBH) VALUES (?, ?, ?, ?, ?);");
         $speciesName = ["Red Maple","White Oak","Pine","Black Willow","Quaking Aspen","Red Wood"];
         $lifeSpan =["90","300","150","65","55","600"];
         $Disperal = ["100.00","150.00","200.00","120.00","100.00","300.00"];
@@ -18,7 +19,7 @@ class SpeciesAdapter extends Adapter{
     }
 
     public function  QgetSpecies(){
-        $stmt = $pdo->prepare("select * from Species");
+        $stmt = $this->conn->prepare("select * from Species");
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         /*   

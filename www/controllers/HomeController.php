@@ -15,8 +15,9 @@ class HomeController {
     }
 
     public function forestArea(){
-      $forest = new Forest;
-      $forest->generateCells();
+        $adapter = new ForestAdapter();
+        $forest = new Forest($adapter);
+        $forest->generateCells();
     }
 
 }

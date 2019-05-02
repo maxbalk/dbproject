@@ -10,6 +10,9 @@ class CellAdapter extends Adapter{
       $stmt = $this->conn->prepare("INSERT INTO cell (id, Forest_name, X_coordinate, Y_coordinate) VALUES (?, ?, ?, ?)");
       $stmt->execute([$id, $name, $xval, $yval]);
     }
+
+
+
   }
 
 
@@ -17,7 +20,7 @@ class Cell{
 
   private $adapter;
 
-  public __construct($adapter){
+  public function __construct($adapter){
     $this->adapter = $adapter;
   }
 

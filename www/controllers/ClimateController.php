@@ -1,6 +1,4 @@
-<?
-require_once(ROOT.'/models/Species.php');
-require_once(ROOT.'/models/Climate.php');
+<?php
 class ClimateController {
 
     private $view;
@@ -8,13 +6,14 @@ class ClimateController {
         $this->view = $view;
     }
 
-    public function displayClimates($climate){
-        $climates = $climate->getClimates();
+    public function displayClimates(){
+        $adapter = new ClimateAdapter();
+        $climate = new Climate($adapter);
+        $climate->getClimates();
         //$this->view->getContent();
     }
     
     public function displaySpecies(){
-        $species = new Species();
         $this->view->getContent();
     }
 

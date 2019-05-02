@@ -3,37 +3,33 @@ require_once(ROOT.'/Adapter.php');
 require_once('cell.php');
 
 class ForestAdapter extends Adapter{
-    public function __construct(){
-        echo "created adapter <br>";
-    }
 
     public function QinsertForest($name){
         $stmt = $this->conn->prepare("
             INSERT INTO Forest (Forest_name)
             VALUES (?)
         ");
-
     }
 
     public function QgenerateCells(){
-      $stmt = $this->conn->prepare("SELECT Official_name, Lat_north, Lat_south, Long_east, Long_west FROM forest");
-      while($row = $result->fetch()){
-          $xrange = (int)(($wlong - $elong)/5);
-          $yrange = (int)(($nlat - $slat)/5);
-          $id = 1;
+        $stmt = $this->conn->prepare("SELECT Official_name, Lat_north, Lat_south, Long_east, Long_west FROM forest");
+        while($row = $result->fetch()){
+            $xrange = (int)(($wlong - $elong)/5);
+            $yrange = (int)(($nlat - $slat)/5);
+            $id = 1;
         }
-        retrun $row;
+        return $row;
     }
-
-
 }
+
+
 
 class Forest {
     //this class handles CRUD operations for Forest and collateral entities.
     private $adapter;
 
     public function __construct($adapter){
-        this->adapter = $adapter;
+        $this->adapter = $adapter;
     }
 
     public function insertForest($name){
@@ -52,7 +48,7 @@ class Forest {
           $wlong = $row['Long_west'];
 
           $xrange = (int)(($wlong - $elong)/5);
-          $yrange = (int)(($nlat - $slat(/5);
+          $yrange = (int)(($nlat - $slat)/5);
           $id = 1;
 
           $cell = new Cell();
@@ -68,10 +64,9 @@ class Forest {
             // Free result set
             unset($result);
           }
-       }
-    }
 
     public function calculateArea(){
 
     }
+
 }

@@ -27,8 +27,6 @@ class router {
             $forests = new Forest($adapter);
         }
         elseif($action == 'cell'){
-            $adapter = new ForestAdapter();
-            $forests = new Forest($adapter);
             $this->controller->forestArea();
         }
         elseif($action == 'cells'){

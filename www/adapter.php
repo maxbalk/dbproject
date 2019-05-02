@@ -1,10 +1,11 @@
-<?
+<?php
 abstract class Adapter{
 
-    public $conn;
+    protected $conn;
 
     function __construct(){
         $this->conn = $this->connect();
+        echo "adapter constructor";
     }
 
     private function connect(){

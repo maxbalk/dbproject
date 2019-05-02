@@ -2,7 +2,6 @@
 require_once(ROOT.'/views/climatepage.php');
 require_once(ROOT.'/controllers/ClimateController.php');
 require_once(ROOT.'/models/Climate.php');
-require_once(ROOT.'/models/Species.php');
 
 //initializes controller and builds dependencies for the homepage view. 
 //its possible a lot will be happening here 
@@ -18,9 +17,7 @@ class router{
 
     public function processRequest($action){
         if($action==''){
-            $adapter = new ClimateAdapter();
-            $climate = new Climate($adapter);
-            $this->controller->displayClimates($climate);
+            $this->controller->displayClimates();
         } 
     }
 }
