@@ -5,8 +5,8 @@ require_once(ROOT.'/controllers/HomeController.php');
 require_once(ROOT.'/models/Forest.php');
 require_once(ROOT.'adapter.php');
 
-//initializes controller and builds dependencies for the homepage view. 
-//its possible a lot will be happening here 
+//initializes controller and builds dependencies for the homepage view.
+//its possible a lot will be happening here
 //one controller per view but possibly several entities
 class router{
 
