@@ -10,6 +10,7 @@ require_once(ROOT.'adapter.php');
 //one controller per view but possibly several entities
 class router{
 
+    private $homeController;
     //the feature's router will handle dependencies for the mvc components.
     public function __construct(){
 

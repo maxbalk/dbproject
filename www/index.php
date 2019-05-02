@@ -13,5 +13,4 @@
         $router = new homepage\router();
         $router->processRequest($action);
     }
-
 ?>
