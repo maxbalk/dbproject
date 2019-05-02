@@ -19,6 +19,12 @@
 
     }
 
+    elseif($route == 'climates'){
+        require_once('routers/ClimateRouter.php');
+        $router = new router();
+        $router->processRequest($action);
+    }
+
     else {
         require_once('routers/HomeRouter.php');
         $router = new router();

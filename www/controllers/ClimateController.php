@@ -8,9 +8,9 @@ class ClimateController {
         $this->view = $view;
     }
 
-    public function displayClimate(){
-        $climate = new Climate();
-        $this->view->getContent();
+    public function displayClimates($climate){
+        $climates = $climate->getClimates();
+        //$this->view->getContent();
     }
     
     public function displaySpecies(){
