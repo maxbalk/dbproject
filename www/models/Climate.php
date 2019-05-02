@@ -5,7 +5,7 @@ class ClimateAdapter extends Adapter{
     public function __construct(){
         echo "created adapter <br>";
     }
-    Qintialclimate(){
+    public function Qintialclimate(){
         $stmt = $pdo->prepare("INSERT INTO Climate (Climate_name, Avg_rainfall) VALUES (?, ?);");
         $climateName = ["Dry","Temperate","Tropical","Continental"]
         $climateRain =["14","6","100","24"]
@@ -14,7 +14,7 @@ class ClimateAdapter extends Adapter{
             }
        
     }
-        QgetClimate(){
+        public function QgetClimate(){
         $stmt = $pdo->prepare("select * from Climate");
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
