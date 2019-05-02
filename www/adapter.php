@@ -1,5 +1,5 @@
 <?
-abstract class dbconn{
+abstract class adapter{
 
     public $conn;
 
@@ -8,7 +8,7 @@ abstract class dbconn{
     }
 
     private function connect(){
-        $config = parse_ini_file("dbconfig.ini");
+        $config = parse_ini_file("/../dbconfig.ini");
         $host = $config['servername'];
         $db = $config['dbname'];
         $user = $config['username'];

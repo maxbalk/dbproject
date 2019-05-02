@@ -1,10 +1,10 @@
 <?
 namespace homepage;
-class Forests {
-    //this class handles CRUD operations for Forest and related entities.
+class Forest {
+    //this class handles CRUD operations for Forest and collateral entities.
     private $adapter;
 
-    function __construct(){
+    public function __construct($adapter){
         echo "created model";
     }
 }

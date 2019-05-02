@@ -58,4 +58,4 @@ create user 'forestManager'@'localhost'
     identified by 'AUPW1234';
 grant select, insert, update, delete
     on *.*
-    to 'forestManager'@'localhost';
+    to 'forestManager'@'%';
