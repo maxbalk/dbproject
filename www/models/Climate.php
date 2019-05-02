@@ -14,7 +14,12 @@ class ClimateAdapter extends Adapter{
             }
        
     }
-
+        QgetClimate(){
+        $stmt = $pdo->prepare("select * from Climate");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        print_r($result['Climate_name']);
+        }
 
 }
 
