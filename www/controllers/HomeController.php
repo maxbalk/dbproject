@@ -10,4 +10,8 @@ class HomeController {
         $this->view->getContent();
     }
 
+    public function newForest($forests){
+        
+    }
+
 }

@@ -20,6 +20,11 @@ class router{
             $adapter = new ForestAdapter();
             $forests = new Forest($adapter);
             $this->controller->displayForests();
+        } 
+        elseif($action=='new-forest'){
+            //initialize POST data here
+            $adapter = new ForestAdapter();
+            $forests = new Forest($adapter);
         }
     }
 }
