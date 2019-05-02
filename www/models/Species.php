@@ -20,10 +20,24 @@ class SpeciesAdapter extends Adapter{
         $stmt = $pdo->prepare("select * from Species");
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
+   /* if($result->rowCount() > 0){
+        $speciesarray = array(
+            array("Scientific_name","Life Span","Disperal Distance", "Fire Tolerance", "DBH")
+                             );
+            
+        while($row = $result->fetch()){
+            $name = $row['Official_name'];
+            $nlat = $row['Lat_north'];
+            $slat = $row['Lat_south'];
+            $elong = $row['Long_east'];
+            $wlong = $row['Long_west'];
+
         print_r($result['Species_name']);
         }
 
 }
+*/
+           print_r($result);
 
 class Species {
     //this class handles CRUD operations for Forest and collateral entities.
