@@ -1,6 +1,4 @@
 <?php
-require_once(ROOT.'/Adapter.php');
-
 class ClimateAdapter extends Adapter{
 
     public function Qintialclimate(){

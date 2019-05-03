@@ -1,24 +1,34 @@
 <?php
-require_once(ROOT.'/Adapter.php');
 require_once('cell.php');
 
 class ForestAdapter extends Adapter{
 
-    public function QinsertForest($name){
-        $stmt = $this->conn->prepare("
-            INSERT INTO Forest (Forest_name)
-            VALUES (?)
-        ");
+    public function QinsertForest($name, $n, $s, $e, $w){
+        $stmt = $this->conn->prepare(
+            "INSERT INTO Forest
+             VALUES (?, ?, ?, ?, ?)"
+        );
+        try {
+            $stmt->execute([$name, $n, $s, $e, $w]);
+        } catch (PDOException $e){
+            echo "error: ", $e->getMessage();
+        }
     }
 
-    public function QgenerateCells(){
-        $stmt = $this->conn->prepare("SELECT Official_name, Lat_north, Lat_south, Long_east, Long_west FROM forest");
-        while($row = $result->fetch()){
-            $xrange = (int)(($wlong - $elong)/5);
-            $yrange = (int)(($nlat - $slat)/5);
-            $id = 1;
+    public function QGetForestInfo($forestName){
+        /*Official_name is the primary key so there will only be one result anyway
+        but I'm array_push ing to stay consistent with the other adapter methods */
+        $stmt = $this->conn->prepare(
+            "SELECT Official_name, Lat_north, Lat_south, Long_east, Long_west 
+             FROM Forest
+             WHERE Official_name = ?"
+        );
+        $stmt->execute([$forestName]);
+        $rows = array();
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+            array_push($rows, $row);
         }
-        return $row;
+        return $rows;
     }
 }
 
@@ -32,14 +42,16 @@ class Forest {
         $this->adapter = $adapter;
     }
 
-    public function insertForest($name){
-        $this->adapter->QinsertForest($name);
+    public function insertForest($name, $n, $s, $e, $w){
+        $this->adapter->QinsertForest($name, $n, $s, $e, $w);
+        /*if we're generating the cells only once each time we
+          make a new forest we can just pass these function params
+          to generateCells but for right now this is chill */
+        $this->generateCells($name);
     }
 
-    private function generateCells(){
-
-        $result = $pdo->query($sql);
-        $row = $this->adapter->QgenerateCells();
+    private function generateCells($name){
+        $row = $this->adapter->QGetForestInfo($name);
 
         $name = $row['Official_name'];
         $nlat = $row['Lat_north'];
@@ -49,21 +61,23 @@ class Forest {
 
         $xrange = (int)(($wlong - $elong)/5);
         $yrange = (int)(($nlat - $slat)/5);
-        $id = 1;
 
+        $adapter = new CellAdapter();
         $cell = new Cell($adapter);
 
+        /*this calls a ton of INSERT queries on the database, 
+          might be cool to eventually refactor into string concatentation 
+          or at least make a data structure of cells */
         for ($x = 0; $x < $xrange; $x += 1){
            for ($y = 0; $y < $yrange; $y += 1){
-               $cell->newCell($id, $name, $x, $y);
-               $id++;
+               $cell->newCell($name, $x, $y);
            }
         }
 
-        echo "Forests have been divided into coordinates";
-            // Free result set
-            unset($result);
-          }
+        echo "Forests have been divided into coordinates<br>";
+        // Free result set
+        unset($result);
+    }
 
     public function calculateArea(){
 

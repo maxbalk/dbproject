@@ -23,7 +23,7 @@ create table Climate (
 );
 
 create table Cell (
-    id int(11),
+    id int(11) AUTO_INCREMENT,
     X_coordinate int(4),
     Y_coordinate int(4),
     Forest_name varchar(40), 

@@ -1,5 +1,6 @@
 <?php
     define("ROOT",$_SERVER["DOCUMENT_ROOT"]);
+    require_once(ROOT.'/Adapter.php');
 
     // capture GET requests if provided. otherwise, set to " '' "
     $route = $_GET['route'] ?? '';

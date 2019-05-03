@@ -10,14 +10,17 @@ class HomeController {
         $this->view->getContent();
     }
 
-    public function newForest($forests){
-
+    public function newForest(){
+        //get POST data from input form and pass to new forest 
+        $adapter = new ForestAdapter();
+        $forest = new Forest($adapter);
+        //north south east west
+        //my meaningless example data :)
+        $forest->insertForest("Canada", 100, 50, 50, 100);
     }
 
     public function forestArea(){
-        $adapter = new ForestAdapter();
-        $forest = new Forest($adapter);
-        $forest->generateCells();
+
     }
 
 }

@@ -22,9 +22,7 @@ class router {
             $this->controller->displayForests();
         }
         elseif($action=='new-forest'){
-            //initialize POST data here
-            $adapter = new ForestAdapter();
-            $forests = new Forest($adapter);
+            $this->controller->newForest();
         }
         elseif($action == 'cell'){
             $this->controller->forestArea();
