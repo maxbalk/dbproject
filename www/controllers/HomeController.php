@@ -19,6 +19,12 @@ class HomeController {
         $forest->insertForest("Canada", 90, 50, 50, 90);
     }
 
+    public function seedTrees(){
+        $adapter = new CellAdapter();
+        $cell = new Cell($adapter);
+        $cell->cellConatains('Canada');
+    }
+
     public function forestArea(){
 
     }

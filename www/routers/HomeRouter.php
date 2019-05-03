@@ -2,6 +2,7 @@
 require_once(ROOT.'/views/Homepage.php');
 require_once(ROOT.'/controllers/HomeController.php');
 require_once(ROOT.'/models/Forest.php');
+require_once(ROOT.'/models/cell.php');
 
 //initializes controller and builds dependencies for the homepage view.
 //its possible a lot will be happening here
@@ -27,8 +28,8 @@ class router {
         elseif($action == 'cell'){
             $this->controller->forestArea();
         }
-        elseif($action == 'cells'){
-          
+        elseif($action == 'seed-trees'){
+            $this->controller->
 
         }
     }

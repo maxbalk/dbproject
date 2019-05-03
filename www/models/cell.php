@@ -24,31 +24,32 @@ class CellAdapter extends Adapter{
       }
     }
 
-    public function QgetIDs(){
-      $stmt = $this->conn->prepare("SELECT id FROM Cell WHERE Forest_name = 'Canada'");
-      $stmt->execute();
-      $result = $stmt->fetch(PDO::FETCH_ASSOC);
-      return $result;
-
+    public function QgetIDs($forestName){
+        $stmt = $this->conn->prepare("SELECT id FROM Cell WHERE Forest_name = ?");
+        $stmt->execute([$forestName]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+        $result
     }
 }
 
 class Cell{
 
-  private $adapter;
+    private $adapter;
 
-  public function __construct($adapter){
-    $this->adapter = $adapter;
-  }
+    public function __construct($adapter){
+        $this->adapter = $adapter;
+    }
 
-  public function newCell($name, $xval, $yval){
-      echo "new cell";
-    $this->adapter->QinsertCells($name, $xval, $yval);
-  }
+    public function newCell($name, $xval, $yval){
+        echo "new cell";
+        $this->adapter->QinsertCells($name, $xval, $yval);
+    }
 
-  public function cellConatains(){
-    $id = $this->adapter->QgetIDs();
-    $this->adapter->QcellContains($id);
-  }
+    //populates a forest's cells with rando trees
+    public function cellConatains($forestName){
+        $id = $this->adapter->QgetIDs($forestName);
+        $this->adapter->QcellContains($id);
+    }
 }
 ?>

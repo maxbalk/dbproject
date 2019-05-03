@@ -18,6 +18,7 @@ class router{
     public function processRequest($action){
         if($action==''){
             $this->controller->displayClimates();
-        } 
+        }
+
     }
 }
