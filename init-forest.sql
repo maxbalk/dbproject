@@ -34,9 +34,9 @@ create table Cell (
 create table Tree_species (
     Scientific_name varchar(40),
     lifespan int(4),
-    Dispersal_distance float(4,2),
-    Fire_tolerance float(4,2),
-    DBH float(4,2),
+    Dispersal_distance float(6,2),
+    Fire_tolerance float(6,2),
+    DBH float(6,2),
     primary key (Scientific_name)
 );
 

@@ -1,6 +1,4 @@
 <?php
-use Species\SpeciesAdapter;
-
 class ClimateController {
 
     private $view;
@@ -24,6 +22,4 @@ class ClimateController {
         $species = new Species($adapter);
         $species->seedSpecies();
     }
-
-
 }

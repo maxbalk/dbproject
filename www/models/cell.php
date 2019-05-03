@@ -53,16 +53,8 @@ class Cell{
 
     //populates a forest's cells with rando trees
     public function cellConatains($forestName){
-        if($cellIDs = $this->adapter->QgetIDs($forestName)){
-            echo nl2br("retrieved cell IDs for forest ".$forestName);
-            if($this->adapter->QcellContains($cellIDs)){
-                echo nl2br("populated cells with trees");
-            } else {
-                echo nl2br(" failed to populate cells with trees");
-            }
-        } else {
-            echo nl2br(" failed to retrieve cell IDs for forest ".$forestName);
-        }
+        $cellIDs = $this->adapter->QgetIDs($forestName);
+        //$this->adapter->QcellContains($cellIDs);
     }
 }
 ?>

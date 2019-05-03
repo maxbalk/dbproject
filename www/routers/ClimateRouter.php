@@ -2,6 +2,7 @@
 require_once(ROOT.'/views/climatepage.php');
 require_once(ROOT.'/controllers/ClimateController.php');
 require_once(ROOT.'/models/Climate.php');
+require_once(ROOT.'/models/Species.php');
 
 //initializes controller and builds dependencies for the homepage view. 
 //its possible a lot will be happening here 
@@ -9,7 +10,6 @@ require_once(ROOT.'/models/Climate.php');
 class router{
 
     private $controller;
-    //the feature's router will handle dependencies for the mvc components.
     public function __construct(){
         $view = new ClimatePage();
         $this->controller = new ClimateController($view);
@@ -18,6 +18,9 @@ class router{
     public function processRequest($action){
         if($action==''){
             $this->controller->displayClimates();
+        }
+        elseif($action=='seed-species'){
+            $this->controller->seedSpecies();
         }
 
     }

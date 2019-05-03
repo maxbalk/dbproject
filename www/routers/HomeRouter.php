@@ -18,8 +18,6 @@ class router {
 
     public function processRequest($action){
         if($action==''){
-            $adapter = new ForestAdapter();
-            $forests = new Forest($adapter);
             $this->controller->displayForests();
         }
         elseif($action=='new-forest'){
@@ -29,7 +27,7 @@ class router {
             $this->controller->forestArea();
         }
         elseif($action == 'seed-trees'){
-           $this->controller->seedTrees();
+            $this->controller->seedTrees();
         }
     }
 }
