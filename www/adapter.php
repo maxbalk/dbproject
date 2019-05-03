@@ -5,7 +5,6 @@ abstract class Adapter{
 
     function __construct(){
         $this->conn = $this->connect();
-        echo "adapter constructor";
     }
 
     private function connect(){
@@ -18,12 +17,4 @@ abstract class Adapter{
         return $pdo;
     }
 
-    public function crud($stmt){
-        if($stmt->execute() == TRUE) {
-            return 1;
-        }
-        return 0;
-    }
 }
-
-    

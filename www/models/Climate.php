@@ -13,11 +13,15 @@ class ClimateAdapter extends Adapter{
        
     }
     public function QgetClimate(){
-        echo "qgclimate<br>";
         $stmt = $this->conn->prepare("select * from Climate");
         $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        print_r($result);
+        $climates = array();
+        while($results = $stmt->fetch(PDO::FETCH_ASSOC)){
+            array_push($climates, $results);
+        }
+        foreach($climates as $climate){
+            print_r($climate);
+        }
     }
 
 }
@@ -33,7 +37,6 @@ class Climate {
         $this->adapter->Qinitalclimate();
     } 
     public function getClimates(){
-        echo "getting climates<br>";
         $this->adapter->QgetClimate();
         /*
         $climates = $this->adapter->QgetClimates();
