@@ -1,14 +1,20 @@
+<link rel="stylesheet" type="text/css" href="/views/style.css">
 <?php ob_start();
+
 class Homepage{
 
-    private $content;
-
-    public function __construct(){
-        $content = ob_get_clean();
-    }
-
     public function displayForests($forests){
-        ?><table>
+        ?>
+        <form id="forestForm" action="/vcheck/checklist" method="post"><br>
+            <input type="text" name="newForestName" placeholder="Forest Name">
+            <input type="text" name="newForestLocation" placeholder="Country">
+            <input type="text" name="nlat" placeholder="N Border Long">
+            <input type="text" name="slat" placeholder="S Border Long">
+            <input type="text" name="elong" placeholder="E Border Lat">
+            <input type="text" name="wlong" placeholder="W Border Lat">
+            <button form="forestForm" type="submit">Create New Forest</button>
+        </form><br>
+        <table>
             <tr>
             <th scope="col">Forest Name</th>
             <th scope="col">northern border</th>
@@ -18,19 +24,22 @@ class Homepage{
             ?><tr>
                 <td><?= $forest['Official_name']; ?>
                 <td><?= $forest['Lat_north']; ?>
+                <td><button>Inspect</button>
             </tr><?
         }
         ?></table><?
         $this->getContent();
     }
 
-    private function getContent(){
+    private function getContent(){ 
+        $content = ob_get_clean();
         ?>
-            <h2>homepage view</h2>
-
-        <?php $content = ob_get_clean();
-        echo $content;
+        <div style="text-align:center">
+        <div style="display: inline-block">
+            <h2>homepage view</h2><br>  
+            <?= $content; ?>
+        <div>
+        </div>
+        <?
     }
 }
-
-?>
