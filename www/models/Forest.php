@@ -4,9 +4,9 @@ require_once('cell.php');
 class ForestAdapter extends Adapter{
 
     public function QinsertForest($name, $n, $s, $e, $w){
-        $stmt = $this->conn->prepare(
-            "INSERT INTO Forest
-             VALUES (?, ?, ?, ?, ?)"
+        $stmt = $this->conn->prepare("
+            INSERT INTO Forest (Official_name, Lat_north, Lat_south, Long_east, Long_west)
+            VALUES (?, ?, ?, ?, ?)"
         );
         try {
             $stmt->execute([$name, $n, $s, $e, $w]);

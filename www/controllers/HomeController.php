@@ -16,7 +16,7 @@ class HomeController {
         $forest = new Forest($adapter);
         //north south east west
         //my meaningless example data :)
-        $forest->insertForest("Canada", 100, 50, 50, 100);
+        $forest->insertForest("Canada", 90, 50, 50, 90);
     }
 
     public function forestArea(){
