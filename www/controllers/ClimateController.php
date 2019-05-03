@@ -9,7 +9,10 @@ class ClimateController {
     public function displayClimates(){
         $adapter = new ClimateAdapter();
         $climate = new Climate($adapter);
+        $specadapter = new SpeciesAdapter();
+        $species = new Species($specadapter);
         $climate->getClimates();
+        $species->getSpecies();
         //$this->view->getContent();
     }
     

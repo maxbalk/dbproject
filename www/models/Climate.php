@@ -2,14 +2,17 @@
 class ClimateAdapter extends Adapter{
 
     public function Qintialclimate(){
-        $stmt = $this->conn->prepare("INSERT INTO Climate (Climate_name, Avg_rainfall) VALUES (?, ?);");
+        $stmt = $this->conn->prepare(
+            "INSERT INTO Climate (Climate_name, Avg_rainfall) 
+             VALUES (?, ?);"
+        );
         $climateName = ["Dry","Temperate","Tropical","Continental"];
         $climateRain =["14","6","100","24"];
             for($i=0; $i<sizeof($climateName); $i++){
                 $stmt->execute([$climateName[i], $climateRain[i]]);  
-            }
-       
+            }  
     }
+    
     public function QgetClimate(){
         $stmt = $this->conn->prepare("select * from Climate");
         $stmt->execute();
@@ -31,9 +34,11 @@ class Climate {
     public function __construct($adapter){
         $this->adapter = $adapter;
     }
+
     public function initalclimate(){
         $this->adapter->Qinitalclimate();
     } 
+
     public function getClimates(){
         $this->adapter->QgetClimate();
         /*

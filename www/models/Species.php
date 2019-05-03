@@ -14,24 +14,15 @@ class SpeciesAdapter extends Adapter{
     }
 
     public function  QgetSpecies(){
-        $stmt = $this->conn->prepare("select * from Species");
+        $stmt = $this->conn->prepare("select * from Tree_species");
         $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        /*   
-        if($result->rowCount() > 0){
-        $speciesarray = array(
-            array("Scientific_name","Life Span","Disperal Distance", "Fire Tolerance", "DBH"));
-            
-        while($row = $result->fetch()){
-            $name = $row['Official_name'];
-            $nlat = $row['Lat_north'];
-            $slat = $row['Lat_south'];
-            $elong = $row['Long_east'];
-            $wlong = $row['Long_west'];
+        $species = array();
+        while($results = $stmt->fetch(PDO::FETCH_ASSOC)){
+            array_push($species, $results);
         }
-        print_r($result['Species_name']);
-        */
-        print_r($result);
+        foreach($species as $tree){
+            print_r($tree);
+        }
     }
 }
 
@@ -45,6 +36,10 @@ class Species {
 
     public function seedSpecies(){
         $this->adapter->Qintialspecies();
+    }
+
+    public function getSpecies(){
+        $this->adapter->QgetSpecies();
     }
     
 }
