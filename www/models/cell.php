@@ -11,25 +11,31 @@ class CellAdapter extends Adapter{
     }
 
 
-    public function QcellContains($id){
-      $species = array('Oak', 'Pine', 'Maple');
-      $stmt = $this->conn->prepare("INSERT INTO Contains_species (Species_name, cell_id, numTrees) VALUES (?, ?, ?)");
-      $m = count($id);
-      $n = count($species);
-      for ($i = 0; $i < m; $i++){
-        for ($j = 0; $j < n; $j++){
-          $count = mt_rand(1, 100);
-          $stmt->execute([$species[i], $id[j], $count]);
+    public function QcellContains($cells){
+        //these species names HAVE to match the entries in the species table
+        //cause this is all hand coded data generation 
+        $species = array('White Oak', 'Pine', 'Red Maple');
+        
+        $stmt = $this->conn->prepare(
+            "INSERT INTO Contains_species (Species_name, cell_id, numTrees) 
+             VALUES (?, ?, ?)"
+        );
+        for ($i = 0; $i < count($cells); $i++){
+            for ($j = 0; $j < count($species); $j++){
+                $count = mt_rand(1, 100);
+                $stmt->execute([$species[$i], $cells[$j], $count]);
+            }
         }
-      }
     }
 
     public function QgetIDs($forestName){
         $stmt = $this->conn->prepare("SELECT id FROM Cell WHERE Forest_name = ?");
         $stmt->execute([$forestName]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result;
-        $result
+        $cells = array();
+        while($result = $stmt->fetch(PDO::FETCH_COLUMN)){
+            array_push($cells, $result);
+        }
+        return $cells;
     }
 }
 
@@ -42,14 +48,21 @@ class Cell{
     }
 
     public function newCell($name, $xval, $yval){
-        echo "new cell";
         $this->adapter->QinsertCells($name, $xval, $yval);
     }
 
     //populates a forest's cells with rando trees
     public function cellConatains($forestName){
-        $id = $this->adapter->QgetIDs($forestName);
-        $this->adapter->QcellContains($id);
+        if($cellIDs = $this->adapter->QgetIDs($forestName)){
+            echo nl2br("retrieved cell IDs for forest ".$forestName);
+            if($this->adapter->QcellContains($cellIDs)){
+                echo nl2br("populated cells with trees");
+            } else {
+                echo nl2br(" failed to populate cells with trees");
+            }
+        } else {
+            echo nl2br(" failed to retrieve cell IDs for forest ".$forestName);
+        }
     }
 }
 ?>

@@ -53,7 +53,6 @@ class Forest {
         $slat = $row['Lat_south'];
         $elong = $row['Long_east'];
         $wlong = $row['Long_west'];
-        print_r($row['Lat_north']);
         $xrange = (int)(($wlong - $elong)/5);
         $yrange = (int)(($nlat - $slat)/5);
         $adapter = new CellAdapter();

@@ -45,9 +45,8 @@ class Species {
     private $adapter;
 
     public function __construct($adapter){
-        echo "created model <br>";
     }
-    public function initalclimate($adapter){
+    public function seedSpecies($adapter){
         $this->adapter->Qinitalspecies();
     }
     

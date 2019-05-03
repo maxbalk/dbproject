@@ -29,8 +29,7 @@ class router {
             $this->controller->forestArea();
         }
         elseif($action == 'seed-trees'){
-            $this->controller->
-
+           $this->controller->seedTrees();
         }
     }
 }
