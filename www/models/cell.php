@@ -3,8 +3,11 @@
 class CellAdapter extends Adapter{
 
     public function QinsertCells($name, $xval, $yval){
-      $stmt = $this->conn->prepare("INSERT INTO cell (Forest_name, X_coordinate, Y_coordinate) VALUES (?, ?, ?, ?)");
-      $stmt->execute([$name, $xval, $yval]);
+        $stmt = $this->conn->prepare(
+            "INSERT INTO Cell (Forest_name, X_coordinate, Y_coordinate) 
+             VALUES (?, ?, ?)"
+        );
+        $stmt->execute([$name, $xval, $yval]);
     }
 
 
@@ -39,6 +42,7 @@ class Cell{
   }
 
   public function newCell($name, $xval, $yval){
+      echo "new cell";
     $this->adapter->QinsertCells($name, $xval, $yval);
   }
 

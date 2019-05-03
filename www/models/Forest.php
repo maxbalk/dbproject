@@ -4,31 +4,22 @@ require_once('cell.php');
 class ForestAdapter extends Adapter{
 
     public function QinsertForest($name, $n, $s, $e, $w){
-        $stmt = $this->conn->prepare("
-            INSERT INTO Forest (Official_name, Lat_north, Lat_south, Long_east, Long_west)
-            VALUES (?, ?, ?, ?, ?)"
+        $stmt = $this->conn->prepare(
+            "INSERT INTO Forest (Official_name, Lat_north, Lat_south, Long_east, Long_west)
+             VALUES (?, ?, ?, ?, ?)"
         );
-        try {
-            $stmt->execute([$name, $n, $s, $e, $w]);
-        } catch (PDOException $e){
-            echo "error: ", $e->getMessage();
-        }
+        return $stmt->execute([$name, $n, $s, $e, $w]);
     }
 
     public function QGetForestInfo($forestName){
-        /*Official_name is the primary key so there will only be one result anyway
-        but I'm array_push ing to stay consistent with the other adapter methods */
         $stmt = $this->conn->prepare(
             "SELECT Official_name, Lat_north, Lat_south, Long_east, Long_west 
              FROM Forest
              WHERE Official_name = ?"
         );
         $stmt->execute([$forestName]);
-        $rows = array();
-        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-            array_push($rows, $row);
-        }
-        return $rows;
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row;
     }
 }
 
@@ -43,11 +34,15 @@ class Forest {
     }
 
     public function insertForest($name, $n, $s, $e, $w){
-        $this->adapter->QinsertForest($name, $n, $s, $e, $w);
+        if($this->adapter->QinsertForest($name, $n, $s, $e, $w)){
+            echo "inserted new forest";
+            $this->generateCells($name);
+        } else {
+            echo "could not insert new forest";
+        }
         /*if we're generating the cells only once each time we
           make a new forest we can just pass these function params
           to generateCells but for right now this is chill */
-        $this->generateCells($name);
     }
 
     private function generateCells($name){
@@ -58,10 +53,9 @@ class Forest {
         $slat = $row['Lat_south'];
         $elong = $row['Long_east'];
         $wlong = $row['Long_west'];
-
+        print_r($row['Lat_north']);
         $xrange = (int)(($wlong - $elong)/5);
         $yrange = (int)(($nlat - $slat)/5);
-
         $adapter = new CellAdapter();
         $cell = new Cell($adapter);
 
