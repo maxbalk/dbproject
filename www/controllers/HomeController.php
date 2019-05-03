@@ -7,21 +7,24 @@ class HomeController {
     }
 
     public function displayForests(){
-        $this->view->getContent();
+        $forestAdapter = new ForestAdapter();
+        $forest = new Forest($forestAdapter);
+        $list = $forest->getAllForests();
+        $this->view->displayForests($list);
     }
 
     public function newForest(){
+        $forestAdapter = new ForestAdapter();
+        $forest = new Forest($forestAdapter);
         //get POST data from input form and pass to new forest 
-        $adapter = new ForestAdapter();
-        $forest = new Forest($adapter);
         //north south east west
         //my meaningless example data :)
         $forest->insertForest("Canada", 90, 50, 50, 90);
     }
 
     public function seedTrees(){
-        $adapter = new CellAdapter();
-        $cell = new Cell($adapter);
+        $cellAdapter = new CellAdapter();
+        $cell = new Cell($cellAdapter);
         $cell->cellConatains('Canada');
     }
 

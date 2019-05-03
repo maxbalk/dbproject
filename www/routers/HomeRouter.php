@@ -10,7 +10,6 @@ require_once(ROOT.'/models/cell.php');
 class router {
 
     private $controller;
-    //the feature's router will handle dependencies for the mvc components.
     public function __construct(){
         $view = new Homepage();
         $this->controller = new HomeController($view);

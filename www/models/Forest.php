@@ -21,6 +21,17 @@ class ForestAdapter extends Adapter{
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row;
     }
+
+    public function QgetAllForests(){
+        $stmt = $this->conn->prepare("select * from Forest");
+        $stmt->execute();
+        $forests = array();
+        while($results = $stmt->fetch(PDO::FETCH_ASSOC)){
+            array_push($forests, $results);
+        }
+        return $forests;
+    }
+
 }
 
 
@@ -33,9 +44,12 @@ class Forest {
         $this->adapter = $adapter;
     }
 
+    public function getAllForests(){
+        return $this->adapter->QgetAllForests();
+    }
+
     public function insertForest($name, $n, $s, $e, $w){
         if($this->adapter->QinsertForest($name, $n, $s, $e, $w)){
-            echo "inserted new forest";
             $this->generateCells($name);
         } else {
             echo "could not insert new forest";
