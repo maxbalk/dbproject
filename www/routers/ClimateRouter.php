@@ -22,6 +22,8 @@ class router{
         elseif($action=='seed-species'){
             $this->controller->seedSpecies();
         }
-
+        elseif($action=='seed-climate'){
+            $this->controller->seedClimate();
+        }
     }
 }

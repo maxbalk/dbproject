@@ -25,4 +25,10 @@ class ClimateController {
         $species = new Species($adapter);
         $species->seedSpecies();
     }
+
+    public function seedClimate(){
+        $adapter = new ClimateAdapter();
+        $climate = new Climate($adapter);
+        $climate->seedClimates();
+    }
 }

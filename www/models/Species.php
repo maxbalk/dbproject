@@ -1,7 +1,7 @@
 <?
 class SpeciesAdapter extends Adapter{
 
-    public function Qintialspecies(){
+    public function QseedSpecies(){
         $stmt = $this->conn->prepare("INSERT INTO Tree_species (Scientific_name, lifespan, Dispersal_distance, Fire_tolerance, DBH) VALUES (?, ?, ?, ?, ?);");
         $speciesName = ["Red Maple","White Oak","Pine","Black Willow","Quaking Aspen","Red Wood"];
         $lifeSpan =["90","300","150","65","55","600"];
@@ -35,7 +35,7 @@ class Species {
     }
 
     public function seedSpecies(){
-        $this->adapter->Qintialspecies();
+        $this->adapter->QseedSpecies();
     }
 
     public function getSpecies(){
