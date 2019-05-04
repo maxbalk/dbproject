@@ -1,10 +1,12 @@
-<link rel="stylesheet" type="text/css" href="/views/style.css">
 <?php ob_start();
 
-class Homepage{
+class Homepage extends Layout{
 
     public function displayForests($forests){
         ?>
+        <form action="?route=climates" method="post">
+            <button type="submit">View Climates and Species</button>
+        </form>
         <form id="forestForm" action="" method="post"><br>
             <input type="text" name="newForestName" placeholder="Forest Name">
             <input type="text" name="newForestLocation" placeholder="Country">
@@ -28,19 +30,8 @@ class Homepage{
             </tr><?
         }
         ?></table><?
+        $this->pagetitle = "Forest Management System";
         $this->getContent();
     }
 
-    private function getContent(){ 
-        $content = ob_get_clean();
-        ob_end_clean();
-        ?>
-        <div style="text-align:center">
-        <div style="display: inline-block">
-            <h2>homepage view</h2><br>  
-            <?= $content; ?>
-        <div>
-        </div>
-        <?
-    }
 }
