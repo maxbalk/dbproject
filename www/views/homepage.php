@@ -21,21 +21,21 @@ class Homepage extends Layout{
             <th scope="col">Forest Name</th>
             <th scope="col">Location</th>
             </tr>
-        <?
+        <?php
         foreach($forests as $forest){
             ?><tr>
                 <td><?= $forest['Official_name']; ?></td>
                 <td><?= $forest['Forest_location']; ?></td>
                 <td><form action="?do=inspect-forest" method="post" style="display: inline">
-                        <input type="hidden" name="forest" value="<?= $forest['Official_name']?>"> 
+                        <input type="hidden" name="forest" value="<?= $forest['Official_name']?>">
                         <button type="submit">Inspect</button>
                     </form>
                 </td>
-            </tr><?
+            </tr><?php
         }
-        ?></table><?
+        ?></table><?php
         $this->pagetitle = "Forest Management System";
         $this->getContent();
     }
-
 }
+?>

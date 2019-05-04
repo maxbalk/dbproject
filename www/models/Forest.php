@@ -22,7 +22,7 @@ class ForestAdapter extends Adapter{
     public function QGetForestInfo($forestName){
         $stmt = $this->conn->prepare(
             "SELECT Official_name, Lat_north, Lat_south, Long_east, Long_west, Forest_location
-             FROM Forest, Forest_location 
+             FROM Forest, Forest_location
              WHERE Forest.Official_name = ?
              LIMIT 1"
         );
@@ -34,7 +34,7 @@ class ForestAdapter extends Adapter{
     public function QgetAllForests(){
         $stmt = $this->conn->prepare(
             "SELECT  Official_name, Lat_north, Lat_south, Long_east, Long_west, Forest_location
-             FROM Forest, Forest_location 
+             FROM Forest, Forest_location
              WHERE Forest.Official_name = Forest_location.Forest_name"
         );
         $stmt->execute();
@@ -89,23 +89,25 @@ class Forest {
         $slat = $parent['Lat_south'];
         $elong = $parent['Long_east'];
         $wlong = $parent['Long_west'];
-        $xrange = (int)(($wlong - $elong)/5);
-        $yrange = (int)(($nlat - $slat)/5);
+        $xrange = (int)(abs($wlong - $elong)/5);
+        $yrange = (int)(abs($nlat - $slat)/5);
 
         $adapter = new CellAdapter();
         $cell = new Cell($adapter);
+        /*we need to have an id for each cell in order to insert since it is
+        the primary key. This is the only way I could think of to generate a
+        semi-random value*/
+        $id = mt_rand(1, 1000);
 
-        /*this calls a ton of INSERT queries on the database, 
-          might be cool to eventually refactor into string concatentation 
+        /*this calls a ton of INSERT queries on the database,
+          might be cool to eventually refactor into string concatentation
           or at least make a data structure of cells */
         for ($x = 0; $x < $xrange; $x += 1){
            for ($y = 0; $y < $yrange; $y += 1){
-               $cell->newCell($name, $x, $y);
+               $cell->newCell($id, $name, $x, $y);
+               $id++;
            }
         }
-
-        echo "Forests have been divided into coordinates<br>";
-        // Free result set
         unset($result);
     }
 
