@@ -1,9 +1,9 @@
-<?php ob_start();
+<?php
 
 class Homepage extends Layout{
 
     public function displayForests($forests){
-        ?>
+        ob_start(); ?>
         <form action="?route=climates" method="post">
             <button type="submit">View Climates and Species</button>
         </form>
@@ -24,9 +24,13 @@ class Homepage extends Layout{
         <?
         foreach($forests as $forest){
             ?><tr>
-                <td><?= $forest['Official_name']; ?>
-                <td><?= $forest['Forest_location']; ?>
-                <td><button>Inspect</button>
+                <td><?= $forest['Official_name']; ?></td>
+                <td><?= $forest['Forest_location']; ?></td>
+                <td><form action="?do=inspect-forest" method="post" style="display: inline">
+                        <input type="hidden" name="forest" value="<?= $forest['Official_name']?>"> 
+                        <button type="submit">Inspect</button>
+                    </form>
+                </td>
             </tr><?
         }
         ?></table><?

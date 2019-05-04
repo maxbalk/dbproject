@@ -27,6 +27,9 @@ class HomeRouter {
         elseif($action=='new-forest'){
             $this->controller->newForest();
         }
+        elseif($action=='inspect-forest'){
+            $this->controller->inspectForest();
+        }
         elseif($action == 'cell'){
             $this->controller->forestArea();
         }

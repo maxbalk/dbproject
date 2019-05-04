@@ -13,6 +13,10 @@ class HomeController {
         $this->view->displayForests($list);
     }
 
+    public function inspectForest(){
+        echo $_POST['forest'];
+    }
+
     public function newForest(){
         $forestAdapter = new ForestAdapter();
         $forest = new Forest($forestAdapter);
