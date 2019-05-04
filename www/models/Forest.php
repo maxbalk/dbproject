@@ -94,18 +94,14 @@ class Forest {
 
         $adapter = new CellAdapter();
         $cell = new Cell($adapter);
-        /*we need to have an id for each cell in order to insert since it is
-        the primary key. This is the only way I could think of to generate a
-        semi-random value*/
-        $id = mt_rand(1, 1000);
 
         /*this calls a ton of INSERT queries on the database,
           might be cool to eventually refactor into string concatentation
           or at least make a data structure of cells */
         for ($x = 0; $x < $xrange; $x += 1){
            for ($y = 0; $y < $yrange; $y += 1){
-               $cell->newCell($id, $name, $x, $y);
-               $id++;
+               $cell->newCell($name, $x, $y);
+               $cell->cellContains($name, $x, $y);
            }
         }
         unset($result);

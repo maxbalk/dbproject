@@ -13,10 +13,6 @@ class HomeController {
         $this->view->displayForests($list);
     }
 
-    public function inspectForest(){
-        echo $_POST['forest'];
-    }
-
     public function newForest(){
         $forestAdapter = new ForestAdapter();
         $forest = new Forest($forestAdapter);
@@ -32,11 +28,11 @@ class HomeController {
         );
     }
 
-    public function seedTrees(){
+    /*public function seedTrees(){
         $cellAdapter = new CellAdapter();
         $cell = new Cell($cellAdapter);
         $cell->cellConatains('Canada');
-    }
+    }*/
 
     public function forestArea(){
 
