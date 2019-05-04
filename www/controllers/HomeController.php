@@ -1,20 +1,11 @@
 <?php
-class HomeController {
-
-    private $view;
-    public function __construct($view){
-        $this->view = $view;
-    }
+class HomeController extends Controller {
 
     public function displayForests(){
         $forestAdapter = new ForestAdapter();
         $forest = new Forest($forestAdapter);
         $list = $forest->getAllForests();
         $this->view->displayForests($list);
-    }
-
-    public function inspectForest(){
-        echo $_POST['forest'];
     }
 
     public function newForest(){

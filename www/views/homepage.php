@@ -1,10 +1,9 @@
 <?php
 
-class Homepage extends Layout{
+class Homepage extends View{
 
     public function displayForests($forests){
-        ob_start(); ?>
-        <form action="?route=climates" method="post">
+        ?><form action="?route=climates" method="post">
             <button type="submit">View Climates and Species</button>
         </form>
         <form id="forestForm" action="" method="post"><br>
@@ -26,8 +25,8 @@ class Homepage extends Layout{
             ?><tr>
                 <td><?= $forest['Official_name']; ?></td>
                 <td><?= $forest['Forest_location']; ?></td>
-                <td><form action="?do=inspect-forest" method="post" style="display: inline">
-                        <input type="hidden" name="forest" value="<?= $forest['Official_name']?>"> 
+                <td><form action="?route=forest&do=inspect" method="post" style="display: inline">
+                        <input type="hidden" name="inspectName" value="<?= $forest['Official_name']?>"> 
                         <button type="submit">Inspect</button>
                     </form>
                 </td>
