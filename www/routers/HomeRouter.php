@@ -17,6 +17,9 @@ class router {
 
     public function processRequest($action){
         if($action==''){
+            if(isset($_POST['newForestName'])){
+                $this->controller->newForest();
+            }
             $this->controller->displayForests();
         }
         elseif($action=='new-forest'){

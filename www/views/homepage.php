@@ -5,7 +5,7 @@ class Homepage{
 
     public function displayForests($forests){
         ?>
-        <form id="forestForm" action="?do=new-forest" method="post"><br>
+        <form id="forestForm" action="" method="post"><br>
             <input type="text" name="newForestName" placeholder="Forest Name">
             <input type="text" name="newForestLocation" placeholder="Country">
             <input type="text" name="nlat" placeholder="N Border Long">
@@ -33,6 +33,7 @@ class Homepage{
 
     private function getContent(){ 
         $content = ob_get_clean();
+        ob_end_clean();
         ?>
         <div style="text-align:center">
         <div style="display: inline-block">
