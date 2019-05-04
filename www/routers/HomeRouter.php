@@ -1,5 +1,5 @@
 <?php
-require_once(ROOT.'/views/Homepage.php');
+require_once(ROOT.'/views/homepage.php');
 require_once(ROOT.'/controllers/HomeController.php');
 require_once(ROOT.'/models/Forest.php');
 require_once(ROOT.'/models/cell.php');
@@ -9,7 +9,6 @@ require_once(ROOT.'/models/cell.php');
 //one controller per view but possibly several entities
 class HomeRouter {
 
-    private $controller;
     public function __construct(){
         $view = new Homepage();
         $this->controller = new HomeController($view);
@@ -26,9 +25,6 @@ class HomeRouter {
         }
         elseif($action=='new-forest'){
             $this->controller->newForest();
-        }
-        elseif($action=='inspect-forest'){
-            $this->controller->inspectForest();
         }
         elseif($action == 'cell'){
             $this->controller->forestArea();

@@ -1,12 +1,14 @@
 <?php
 
-class InspectPage extends Layout{
+class ForestPage extends View{
 
-    public function inspectForest(){
-        ob_start(); 
+    public function displayForestInfo($forestInfo){
         ?>
+        <?= $forestInfo['Forest_location']; ?>
         <!--html goes here--> 
         <?
+        $this->pagetitle = $forestInfo['Official_name']."Information";
+        $this->getContent();
     }
 
 }

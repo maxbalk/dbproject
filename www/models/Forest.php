@@ -19,7 +19,7 @@ class ForestAdapter extends Adapter{
         return $stmt->execute([$name, $loc]);
     }
 
-    public function QGetForestInfo($forestName){
+    public function QgetForestInfo($forestName){
         $stmt = $this->conn->prepare(
             "SELECT Official_name, Lat_north, Lat_south, Long_east, Long_west, Forest_location
              FROM Forest, Forest_location
@@ -55,6 +55,10 @@ class Forest {
 
     public function __construct($adapter){
         $this->adapter = $adapter;
+    }
+
+    public function getForestInfo($forestName){
+        return $this->adapter->QgetForestInfo($forestName);
     }
 
     public function getAllForests(){
