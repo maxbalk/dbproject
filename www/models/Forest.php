@@ -11,6 +11,14 @@ class ForestAdapter extends Adapter{
         return $stmt->execute([$name, $n, $s, $e, $w]);
     }
 
+    public function QinsertForestLocation($name, $loc){
+        $stmt = $this->conn->prepare(
+            "INSERT INTO Forest_location (Forest_name, Forest_location)
+             VALUES (?, ?)"
+        );
+        return $stmt->execute([$name, $loc]);
+    }
+
     public function QGetForestInfo($forestName){
         $stmt = $this->conn->prepare(
             "SELECT Official_name, Lat_north, Lat_south, Long_east, Long_west 
@@ -18,8 +26,8 @@ class ForestAdapter extends Adapter{
              WHERE Official_name = ?"
         );
         $stmt->execute([$forestName]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $row;
+        $parent = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $parent;
     }
 
     public function QgetAllForests(){
@@ -48,8 +56,9 @@ class Forest {
         return $this->adapter->QgetAllForests();
     }
 
-    public function insertForest($name, $n, $s, $e, $w){
+    public function insertForest($name, $loc, $n, $s, $e, $w){
         if($this->adapter->QinsertForest($name, $n, $s, $e, $w)){
+            $this->insertForestLocation($name, $loc);
             $this->generateCells($name);
         } else {
             echo "could not insert new forest";
@@ -59,16 +68,25 @@ class Forest {
           to generateCells but for right now this is chill */
     }
 
-    private function generateCells($name){
-        $row = $this->adapter->QGetForestInfo($name);
+    private function insertForestLocation($name, $loc){
+        if($this->adapter->QinsertForestLocation($name, $loc)){
+            return;
+        } else {
+            echo "could not insert forest location";
+        }
+    }
 
-        $name = $row['Official_name'];
-        $nlat = $row['Lat_north'];
-        $slat = $row['Lat_south'];
-        $elong = $row['Long_east'];
-        $wlong = $row['Long_west'];
+    private function generateCells($name){
+        $parent = $this->adapter->QGetForestInfo($name);
+
+        $name = $parent['Official_name'];
+        $nlat = $parent['Lat_north'];
+        $slat = $parent['Lat_south'];
+        $elong = $parent['Long_east'];
+        $wlong = $parent['Long_west'];
         $xrange = (int)(($wlong - $elong)/5);
         $yrange = (int)(($nlat - $slat)/5);
+
         $adapter = new CellAdapter();
         $cell = new Cell($adapter);
 

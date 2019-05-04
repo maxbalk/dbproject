@@ -16,10 +16,16 @@ class HomeController {
     public function newForest(){
         $forestAdapter = new ForestAdapter();
         $forest = new Forest($forestAdapter);
-        //get POST data from input form and pass to new forest 
-        //north south east west
-        //my meaningless example data :)
-        $forest->insertForest("Canada", 90, 50, 50, 90);
+        //dont ever do form input like this
+        //validate and sanitize first
+        //but we have to finish project
+        $forest->insertForest(  $_POST['newForestName'],
+                                $_POST['newForestLocation'],
+                                $_POST['nlat'],
+                                $_POST['slat'],
+                                $_POST['elong'],
+                                $_POST['wlong']
+        );
     }
 
     public function seedTrees(){
