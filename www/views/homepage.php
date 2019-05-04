@@ -17,13 +17,13 @@ class Homepage{
         <table>
             <tr>
             <th scope="col">Forest Name</th>
-            <th scope="col">northern border</th>
+            <th scope="col">Location</th>
             </tr>
         <?
         foreach($forests as $forest){
             ?><tr>
                 <td><?= $forest['Official_name']; ?>
-                <td><?= $forest['Lat_north']; ?>
+                <td><?= $forest['Forest_location']; ?>
                 <td><button>Inspect</button>
             </tr><?
         }

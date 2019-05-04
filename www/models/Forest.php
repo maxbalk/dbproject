@@ -21,9 +21,10 @@ class ForestAdapter extends Adapter{
 
     public function QGetForestInfo($forestName){
         $stmt = $this->conn->prepare(
-            "SELECT Official_name, Lat_north, Lat_south, Long_east, Long_west 
-             FROM Forest
-             WHERE Official_name = ?"
+            "SELECT Official_name, Lat_north, Lat_south, Long_east, Long_west, Forest_location
+             FROM Forest, Forest_location 
+             WHERE Forest.Official_name = ?
+             LIMIT 1"
         );
         $stmt->execute([$forestName]);
         $parent = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -31,7 +32,11 @@ class ForestAdapter extends Adapter{
     }
 
     public function QgetAllForests(){
-        $stmt = $this->conn->prepare("select * from Forest");
+        $stmt = $this->conn->prepare(
+            "SELECT  Official_name, Lat_north, Lat_south, Long_east, Long_west, Forest_location
+             FROM Forest, Forest_location 
+             WHERE Forest.Official_name = Forest_location.Forest_name"
+        );
         $stmt->execute();
         $forests = array();
         while($results = $stmt->fetch(PDO::FETCH_ASSOC)){
