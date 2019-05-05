@@ -1,7 +1,7 @@
 <?php
-class ClimateController {
+class ClimateController extends Controller{
 
-    private $view;
+    protected $view;
     public function __construct($view){
         $this->view = $view;
     }
@@ -15,7 +15,7 @@ class ClimateController {
         $species->getSpecies();
         //$this->view->getContent();
     }
-    
+
     public function displaySpecies(){
         $this->view->getContent();
     }

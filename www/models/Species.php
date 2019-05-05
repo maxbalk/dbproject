@@ -1,4 +1,4 @@
-<?
+<?php
 class SpeciesAdapter extends Adapter{
 
     public function QseedSpecies(){
@@ -9,7 +9,7 @@ class SpeciesAdapter extends Adapter{
         $Fire = ["6.00","9.00","3.00","7.00","3.50","5.00"];
         $DBH = ["2.00","4.00","2.00","3.00","2,00","5.00"];
         for($i=0; $i<sizeof($speciesName); $i++){
-            $stmt->execute([$speciesName[$i], $lifeSpan[$i], $Disperal[$i],$Fire[$i],$DBH[$i]]);  
+            $stmt->execute([$speciesName[$i], $lifeSpan[$i], $Disperal[$i],$Fire[$i],$DBH[$i]]);
         }
     }
 
@@ -41,5 +41,5 @@ class Species {
     public function getSpecies(){
         $this->adapter->QgetSpecies();
     }
-    
+
 }

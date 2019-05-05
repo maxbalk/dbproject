@@ -2,12 +2,12 @@
 
 class ForestPage extends View{
 
-    public function displayForestInfo($forestInfo){ 
+    public function displayForestInfo($forestInfo){
         ?>
         <form action="/"method="post">
             <button type="submit">Return to homepage</button>
         </form>
-        
+
             <form id="updateForm" action="?route=forest&do=update" method="post">
                 <input type="text" name="newForestName" value=<?= $forestInfo['Official_name'];?>>
                 <input type="text" name="newForestLocation" value=<?= $forestInfo['Forest_location'];?>>
@@ -27,7 +27,7 @@ class ForestPage extends View{
             <button form="updateForm" type="submit">Update Forest Information</button>
             <button form="deleteForm" type="submit">Delete this forest</button>
         </div>
-        <?
+        <?php
         $this->pagetitle = $forestInfo['Official_name']." Information";
         //$this->getContent();
     }
@@ -44,6 +44,6 @@ class ForestPage extends View{
           <td><?= $treeInfo[$i]['SUM(numTrees)']; ?></td>
         </tr><?php
       }
-      $this->getContent();
+      //$this->getContent();
     }
 }
