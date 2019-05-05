@@ -16,13 +16,19 @@ class ForestRouter {
 
     public function processRequest($action){
         if($action == 'inspect'){
-            $this->controller->inspectForest();
+            $this->controller->inspectForest($_POST['inspectName']);
         }
         elseif($action == 'update'){
             $this->controller->updateForest();
         }
         elseif($action == 'delete'){
             $this->controller->deleteForest();
+        }
+        elseif($action == 'species-search'){
+            $this->controller->searchSpecies($_POST['speciesSearch'], $_POST['fname']);
+        }
+        else {
+            Echo "<h2>Page not found</h2>";
         }
     }
 }

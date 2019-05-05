@@ -25,5 +25,8 @@ class ClimateRouter{
         elseif($action=='seed-climate'){
             $this->controller->seedClimate();
         }
+        else {
+            Echo "<h2>Page not found</h2>";
+        }
     }
 }

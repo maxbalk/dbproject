@@ -2,12 +2,12 @@
 
 class ForestPage extends View{
 
-    public function displayForestInfo($forestInfo){ 
+    public function displayForestInfo($forestInfo, $treeInfo){ 
         ?>
         <form action="/"method="post">
             <button type="submit">Return to homepage</button>
         </form>
-        
+        <div style="display: inline-block">
             <form id="updateForm" action="?route=forest&do=update" method="post">
                 <input type="text" name="newForestName" value=<?= $forestInfo['Official_name'];?>>
                 <input type="text" name="newForestLocation" value=<?= $forestInfo['Forest_location'];?>>
@@ -22,18 +22,27 @@ class ForestPage extends View{
                 <input type="hidden" name="toDelete" value="<?= $forestInfo['Official_name']?>">
             </form>
         </div>
-        <br>
-        <div style="display: inline">
+        <div style="display: inline-block">
             <button form="updateForm" type="submit">Update Forest Information</button>
             <button form="deleteForm" type="submit">Delete this forest</button>
         </div>
-        <?
+        <?php
         $this->pagetitle = $forestInfo['Official_name']." Information";
-        //$this->getContent();
-    }
 
-    public function displayTreeInfo($treeInfo){
-      ?><table>
+      ?>
+      <br>
+      <div style="display: table">
+        <label>Enter Species name to search for cell with the greatest amount</label>
+        <form id="speciesSearch" action="?route=forest&do=species-search" method="post">
+            <input type="text" name="speciesSearch" placeholder="species name">
+            <input type="hidden" name="fname" value="<?= $forestInfo['Official_name']?>">
+            <input type="submit" value="search">
+        </form>
+        <form action="?route=climates" method="post">
+            <input type="submit" value="display list of species">
+        </form>
+      </div>
+      <table>
       <tr>
           <th scope="col">Species Name</th>
           <th scope="col">Total Number</th>
@@ -45,5 +54,11 @@ class ForestPage extends View{
         </tr><?php
       }
       $this->getContent();
+    }
+
+    public function speciesSearchResult($results){
+        foreach($results as $result){
+            ?>Cell(s) with greatest number of trees<?php
+        }
     }
 }

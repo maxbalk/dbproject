@@ -1,15 +1,29 @@
 <?php
 class ForestController extends Controller{
 
-    public function inspectForest(){
-        $forestName = $_POST['inspectName'];
+    public function inspectForest($forestName){
         $forestAdapter = new ForestAdapter();
         $forest = new Forest($forestAdapter);
         $forestInfo = $forest->getForestInfo($forestName);
-        $this->view->displayForestInfo($forestInfo);
         $treeInfo = $forest->countTrees($forestInfo['Official_name']);
-        $this->view->displayTreeInfo($treeInfo);
-        //print_r($treeInfo);
+        $this->view->displayForestInfo($forestInfo, $treeInfo);
+        if(isset($_SESSION['resultantCells'])){
+            $this->view->speciesSearchResult($_SESSION['resultantCells']);
+        }
+        //var_dump($treeInfo);
+    }
+
+    public function searchSpecies($speciesName, $forestName){
+        session_start();
+        /*$cellAdapter = new CellAdapter();
+        $cell = new Cell($cellAdapter);
+        */
+        $forestAdapter = new ForestAdapter();
+        $forest = new Forest($forestAdapter);
+        $forestInfo = $forest->getForestInfo($forestName);
+        $_SESSION['resultantCells'] = $forestInfo;
+        //$cell->searchSpecies($speciesName, $forestName);
+        $this->inspectForest($forestName);
     }
 
     public function updateForest(){

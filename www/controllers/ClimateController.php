@@ -1,10 +1,5 @@
 <?php
-class ClimateController {
-
-    private $view;
-    public function __construct($view){
-        $this->view = $view;
-    }
+class ClimateController extends Controller{
 
     public function displayClimates(){
         $adapter = new ClimateAdapter();

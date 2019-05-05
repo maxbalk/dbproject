@@ -18,5 +18,8 @@ class HomeRouter {
         elseif($action=='new-forest'){
             $this->controller->newForest();
         }
+        else {
+            Echo "<h2>Page not found</h2>";
+        }
     }
 }

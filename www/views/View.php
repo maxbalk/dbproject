@@ -9,7 +9,6 @@ abstract class View {
 
     protected function getContent(){
         $content = ob_get_clean();
-        ob_end_clean();
         ?>
         <link rel="stylesheet" type="text/css" href="/views/style.css">
         <div style="text-align:center">
