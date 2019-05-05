@@ -4,11 +4,6 @@ class ForestPage extends View{
 
     public function displayForestInfo($forestInfo){ 
         ?>
-<<<<<<< HEAD
-        <?= $forestInfo['Forest_location']; ?>
-        <!--html goes here-->
-        <?php
-=======
         <form action="/"method="post">
             <button type="submit">Return to homepage</button>
         </form>
@@ -33,7 +28,6 @@ class ForestPage extends View{
             <button form="deleteForm" type="submit">Delete this forest</button>
         </div>
         <?
->>>>>>> forestInfo
         $this->pagetitle = $forestInfo['Official_name']." Information";
         $this->getContent();
     }
