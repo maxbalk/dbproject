@@ -29,10 +29,15 @@ class CellAdapter extends Adapter{
 
     public function QspeciesSearch($speciesName, $forestName){
       $stmt = $this->conn->prepare(
-        "SELECT id, numTrees FROM contains_species S, cell C WHERE id = cell_id AND
-        Species_name =? AND Forest_name =? AND numTrees IN
-        (SELECT MAX(numTrees) FROM contains_species WHERE Species_name = ?)");
-      $stmt->execute([$speciesName,$forestName, $speciesName]);
+        "SELECT id, numTrees 
+         FROM Contains_species, Cell
+         WHERE id = cell_id AND Species_name = ? AND Forest_name = ? AND numTrees
+         IN (SELECT MAX(numTrees) 
+             FROM Contains_species
+             WHERE Species_name = ?)"
+      );
+      var_dump($speciesName, $forestName);
+      var_dump($stmt->execute([$speciesName, $forestName, $speciesName]));
 
       $numTrees = array();
       while($results = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -69,8 +74,8 @@ class Cell{
         $this->adapter->QcellContains($name, $xval, $yval);
     }
 
-    public function speciesSearch($speciesName){
-      $this->adapter->QspeciesSearch($speciesName);
+    public function speciesSearch($speciesName, $forestName){
+      return $this->adapter->QspeciesSearch($speciesName, $forestName);
     }
 }
 ?>

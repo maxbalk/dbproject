@@ -15,14 +15,12 @@ class ForestController extends Controller{
 
     public function searchSpecies($speciesName, $forestName){
         session_start();
-        /*$cellAdapter = new CellAdapter();
+        $cellAdapter = new CellAdapter();
         $cell = new Cell($cellAdapter);
-        */
-        $forestAdapter = new ForestAdapter();
-        $forest = new Forest($forestAdapter);
-        $forestInfo = $forest->getForestInfo($forestName);
-        $_SESSION['resultantCells'] = $forestInfo;
-        //$cell->searchSpecies($speciesName, $forestName);
+        $_SESSION['resultantCells'] = $cell->speciesSearch($speciesName, $forestName);
+        // var_dump($cell->speciesSearch($speciesName, $forestName));
+        // var_dump($speciesName);
+        // var_dump($forestName);
         $this->inspectForest($forestName);
     }
 
