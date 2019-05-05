@@ -47,7 +47,7 @@ create table Contains_species (
     primary key (Species_name, cell_id)
 );
 
-alter table Forest_location add constraint foreign key (Forest_name) references Forest (Official_name);
+alter table Forest_location add constraint foreign key (Forest_name) references Forest (Official_name) ON UPDATE CASCADE ON DELETE CASCADE;
 alter table Cell add constraint fk_cell_forest foreign key (Forest_name) references Forest (Official_name) ON DELETE CASCADE ON UPDATE CASCADE;
 alter table Cell add constraint fk_cell_climate foreign key (Climate_name) references Climate (Climate_name);
 alter table Contains_species add constraint fk_species_relation foreign key (Species_name) references Tree_species (Scientific_name);

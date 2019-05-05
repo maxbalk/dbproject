@@ -18,5 +18,11 @@ class ForestRouter {
         if($action == 'inspect'){
             $this->controller->inspectForest();
         }
+        elseif($action == 'update'){
+            $this->controller->updateForest();
+        }
+        elseif($action == 'delete'){
+            $this->controller->deleteForest();
+        }
     }
 }

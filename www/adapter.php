@@ -13,7 +13,7 @@ abstract class Adapter{
         $db = $config['dbname'];
         $user = $config['username'];
         $pass = $config['password'];
-        $pdo = new PDO("mysql:host=127.0.0.1;dbname=$db", $user, $pass);
+        $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
         return $pdo;
     }
 

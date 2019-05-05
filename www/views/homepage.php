@@ -2,13 +2,14 @@
 
 class Homepage extends View{
 
-    public function displayForests($forests){
-        ?><form action="?route=climates" method="post">
+    public function displayForests($forests){ 
+        ?>
+        <form action="?route=climates" method="post">
             <button type="submit">View Climates and Species</button>
         </form>
-        <form id="forestForm" action="" method="post"><br>
-            <input type="text" name="newForestName" placeholder="Forest Name">
-            <input type="text" name="newForestLocation" placeholder="Country">
+        <form action="?do=new-forest" method="post"><br>
+            <input type="text" name="ForestName" placeholder="Forest Name">
+            <input type="text" name="ForestLocation" placeholder="Country">
             <input type="text" name="nlat" placeholder="N Border Long">
             <input type="text" name="slat" placeholder="S Border Long">
             <input type="text" name="elong" placeholder="E Border Lat">
