@@ -42,7 +42,7 @@ class ForestPage extends View{
             <input type="submit" value="display list of species">
         </form>
       </div>
-      <table>
+      <table style="display: table">
       <tr>
           <th scope="col">Species Name</th>
           <th scope="col">Total Number</th>
@@ -53,12 +53,30 @@ class ForestPage extends View{
           <td><?= $treeInfo[$i]['SUM(numTrees)']; ?></td>
         </tr><?php
       }
+      ?></table> <?php
       $this->getContent();
     }
 
-    public function speciesSearchResult($results){
-        foreach($results as $result){
-            ?>Cell(s) with greatest number of trees<?php
-        }
+    public function speciesSearchResult($results, $species){
+        $first = $results[0]?>
+        <div style="display: table"><br>
+        <label>Cell(s) in this forest with greatest number of <?= $species ?> trees</label><br>
+        <label>Highest count recorded is <?= $first['numTrees'] ?>
+        <table >
+            <tr>
+                <th scope="col">X coordinate</th>
+                <th scope="col">Y coordinate</th>
+            </tr>
+            <?php foreach($results as $result){
+                ?>
+                <tr>
+                    <td><?= $result['X_coordinate'] ?></td>
+                    <td><?= $result['Y_coordinate'] ?></td>
+                </tr>
+                <?php
+            } ?>
+        </table>
+        </div>
+        <?php
     }
 }

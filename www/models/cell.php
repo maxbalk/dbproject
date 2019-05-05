@@ -29,15 +29,14 @@ class CellAdapter extends Adapter{
 
     public function QspeciesSearch($speciesName, $forestName){
       $stmt = $this->conn->prepare(
-        "SELECT id, numTrees 
+        "SELECT id, numTrees, X_coordinate, Y_coordinate
          FROM Contains_species, Cell
          WHERE id = cell_id AND Species_name = ? AND Forest_name = ? AND numTrees
          IN (SELECT MAX(numTrees) 
              FROM Contains_species
              WHERE Species_name = ?)"
       );
-      var_dump($speciesName, $forestName);
-      var_dump($stmt->execute([$speciesName, $forestName, $speciesName]));
+      $stmt->execute([$speciesName, $forestName, $speciesName]);
 
       $numTrees = array();
       while($results = $stmt->fetch(PDO::FETCH_ASSOC)){

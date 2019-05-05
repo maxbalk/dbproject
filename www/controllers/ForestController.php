@@ -8,9 +8,8 @@ class ForestController extends Controller{
         $treeInfo = $forest->countTrees($forestInfo['Official_name']);
         $this->view->displayForestInfo($forestInfo, $treeInfo);
         if(isset($_SESSION['resultantCells'])){
-            $this->view->speciesSearchResult($_SESSION['resultantCells']);
+            $this->view->speciesSearchResult($_SESSION['resultantCells'], $_SESSION['speciesName']);
         }
-        //var_dump($treeInfo);
     }
 
     public function searchSpecies($speciesName, $forestName){
@@ -18,9 +17,7 @@ class ForestController extends Controller{
         $cellAdapter = new CellAdapter();
         $cell = new Cell($cellAdapter);
         $_SESSION['resultantCells'] = $cell->speciesSearch($speciesName, $forestName);
-        // var_dump($cell->speciesSearch($speciesName, $forestName));
-        // var_dump($speciesName);
-        // var_dump($forestName);
+        $_SESSION['speciesName'] = $speciesName;
         $this->inspectForest($forestName);
     }
 
