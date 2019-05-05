@@ -27,25 +27,18 @@ class CellAdapter extends Adapter{
         }
     }
 
-    public function QspeciesSearch($speciesName){
+    public function QspeciesSearch($speciesName, $forestName){
       $stmt = $this->conn->prepare(
-        "SELECT id, numTrees FROM cell C, contains_species S WHERE C.id = S.cell_id
-        AND Species_name = ?");
-      $stmt->execute([$speciesName]);
+        "SELECT id, numTrees FROM contains_species S, cell C WHERE id = cell_id AND
+        Species_name =? AND Forest_name =? AND numTrees IN
+        (SELECT MAX(numTrees) FROM contains_species WHERE Species_name = ?)");
+      $stmt->execute([$speciesName,$forestName, $speciesName]);
 
       $numTrees = array();
       while($results = $stmt->fetch(PDO::FETCH_ASSOC)){
           array_push($numTrees, $results);
-      }
-      $max = -1;
-      foreach ($numTrees as $cell){
-        if ($cell['numTrees'] > $max){
-          $max = $cell['numTree'];
-          $id = $cell['id']
         }
-      }
-      $maxCell = [$id, $max];
-      return $maxCell;
+      return $numTrees;
     }
 }
 
