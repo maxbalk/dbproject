@@ -26,7 +26,7 @@ class Homepage extends View{
                 <td><?= $forest['Official_name']; ?></td>
                 <td><?= $forest['Forest_location']; ?></td>
                 <td><form action="?route=forest&do=inspect" method="post" style="display: inline">
-                        <input type="hidden" name="inspectName" value="<?= $forest['Official_name']?>"> 
+                        <input type="hidden" name="inspectName" value="<?= $forest['Official_name']?>">
                         <button type="submit">Inspect</button>
                     </form>
                 </td>

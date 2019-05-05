@@ -7,6 +7,8 @@ class ForestController extends Controller{
         $forest = new Forest($forestAdapter);
         $forestInfo = $forest->getForestInfo($forestName);
         $this->view->displayForestInfo($forestInfo);
+        $treeInfo = $forest->countTrees($forestInfo['Official_name']);
+        $this->view->displayTreeInfo($treeInfo);
     }
-    
+
 }

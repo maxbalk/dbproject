@@ -45,6 +45,19 @@ class ForestAdapter extends Adapter{
         return $forests;
     }
 
+    public function QcountTrees($forestName){
+        $stmt = $this->conn->prepare(
+          "SELECT Species_name, sum(numTrees) FROM cell C, contains_species S
+          WHERE C.id = S.cell_id and Forest_name = ? GROUP BY Species_name"
+        );
+        $stmt->execute([$forestName]);
+        $trees = array();
+        while($results = $stmt->fetch(PDO::FETCH_ASSOC)){
+            array_push($trees, $results);
+        }
+        return $trees;
+    }
+
 }
 
 
@@ -108,7 +121,10 @@ class Forest {
                $cell->cellContains($name, $x, $y);
            }
         }
-        unset($result);
+    }
+
+    public function countTrees($forestName){
+      return $this->adapter->QcountTrees($forestName);
     }
 
     public function calculateArea(){
