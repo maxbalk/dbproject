@@ -45,6 +45,14 @@ class ForestAdapter extends Adapter{
         return $forests;
     }
 
+    public function QdeleteForest($name){
+        $stmt = $this->conn->prepare(
+            "DELETE FROM Forest
+             WHERE Official_name =?"
+        );
+        return $stmt->execute([$name]);
+    }
+
     public function QupdateForest($name, $oldName){
         $stmt = $this->conn->prepare(
            "UPDATE Forest
@@ -88,6 +96,14 @@ class Forest {
             $this->updateForestLocation($name, $loc);
         } else {
             echo "could not update forest ".$oldName;
+        }
+    }
+
+    public function deleteForest($name){
+        if($this->adapter->QdeleteForest($name)){
+            return;
+        } else {
+            echo "could not delete forest ". $name;
         }
     }
 
