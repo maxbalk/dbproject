@@ -24,7 +24,7 @@ class ForestAdapter extends Adapter{
             "SELECT Official_name, Lat_north, Lat_south, Long_east, Long_west, Forest_location
              FROM Forest, Forest_location
              WHERE Forest.Official_name = ?
-             LIMIT 1"
+             AND Forest_location.Forest_name = Forest.Official_name"
         );
         $stmt->execute([$forestName]);
         $parent = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -43,6 +43,24 @@ class ForestAdapter extends Adapter{
             array_push($forests, $results);
         }
         return $forests;
+    }
+
+    public function QupdateForest($name, $oldName){
+        $stmt = $this->conn->prepare(
+           "UPDATE Forest
+            SET Official_name  = ?
+            WHERE Official_name = ?" 
+        );
+        return $stmt->execute([$name, $oldName]);
+    }
+
+    public function QupdateForestLocation($name, $loc){
+        $stmt = $this->conn->prepare(
+            "UPDATE Forest_location
+             SET Forest_location  = ?
+             WHERE Forest_name = ?" 
+         );
+         return $stmt->execute([$loc, $name]);
     }
 
 }
@@ -65,6 +83,14 @@ class Forest {
         return $this->adapter->QgetAllForests();
     }
 
+    public function updateForest($name, $loc, $oldName){
+        if($this->adapter->QupdateForest($name, $oldName)){
+            $this->updateForestLocation($name, $loc);
+        } else {
+            echo "could not update forest ".$oldName;
+        }
+    }
+
     public function insertForest($name, $loc, $n, $s, $e, $w){
         if($this->adapter->QinsertForest($name, $n, $s, $e, $w)){
             $this->insertForestLocation($name, $loc);
@@ -82,6 +108,14 @@ class Forest {
             return;
         } else {
             echo "could not insert forest location";
+        }
+    }
+
+    private function updateForestLocation($name, $loc){
+        if($this->adapter->QupdateForestLocation($name, $loc)){
+            return;
+        } else {
+            echo "could not update forest location";
         }
     }
 
@@ -108,11 +142,6 @@ class Forest {
                $cell->cellContains($name, $x, $y);
            }
         }
-        unset($result);
-    }
-
-    public function calculateArea(){
-
         unset($result);
     }
 

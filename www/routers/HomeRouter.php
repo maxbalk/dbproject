@@ -18,19 +18,10 @@ class HomeRouter {
     //views' forms should call the same route again 
     public function processRequest($action){
         if($action==''){
-            if(isset($_POST['newForestName'])){
-                $this->controller->newForest();
-            }
             $this->controller->displayForests();
         }
         elseif($action=='new-forest'){
             $this->controller->newForest();
-        }
-        elseif($action == 'cell'){
-            $this->controller->forestArea();
-        }
-        elseif($action == 'seed-trees'){
-            $this->controller->seedTrees();
         }
     }
 }
