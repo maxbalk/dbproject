@@ -9,6 +9,7 @@ class ForestController extends Controller{
         $this->view->displayForestInfo($forestInfo);
         $treeInfo = $forest->countTrees($forestInfo['Official_name']);
         $this->view->displayTreeInfo($treeInfo);
+        //print_r($treeInfo);
     }
 
     public function updateForest(){

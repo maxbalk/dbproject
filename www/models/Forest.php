@@ -47,8 +47,8 @@ class ForestAdapter extends Adapter{
 
     public function QcountTrees($forestName){
         $stmt = $this->conn->prepare(
-          "SELECT Species_name, sum(numTrees) FROM cell C, contains_species S
-          WHERE C.id = S.cell_id and Forest_name = ? GROUP BY Species_name"
+          "SELECT Species_name, SUM(numTrees) FROM Cell C, Contains_species S
+          WHERE C.id = S.cell_id AND C.Forest_name = ? GROUP BY Species_name"
         );
         $stmt->execute([$forestName]);
         $trees = array();
