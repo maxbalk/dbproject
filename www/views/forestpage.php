@@ -53,7 +53,7 @@ class ForestPage extends View{
           <td><?= $treeInfo[$i]['SUM(numTrees)']; ?></td>
         </tr><?php
       }
-      $this->getContent();
+      //$this->getContent();
     }
 
     public function speciesSearchResult($results){

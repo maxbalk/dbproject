@@ -10,7 +10,7 @@ class ClimateController extends Controller{
         $species->getSpecies();
         //$this->view->getContent();
     }
-    
+
     public function displaySpecies(){
         $this->view->getContent();
     }
