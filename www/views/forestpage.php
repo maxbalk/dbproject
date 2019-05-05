@@ -29,7 +29,7 @@ class ForestPage extends View{
         </div>
         <?
         $this->pagetitle = $forestInfo['Official_name']." Information";
-        $this->getContent();
+        //$this->getContent();
     }
 
     public function displayTreeInfo($treeInfo){
@@ -41,8 +41,9 @@ class ForestPage extends View{
       for($i=0; $i<count($treeInfo); $i++){
         ?><tr>
           <td><?= $treeInfo[$i]['Species_name']; ?></td>
-          <td><?= $treeInfo[$i]['sum(numTrees)']; ?></td>
+          <td><?= $treeInfo[$i]['SUM(numTrees)']; ?></td>
         </tr><?php
       }
+      $this->getContent();
     }
 }

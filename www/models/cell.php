@@ -4,7 +4,7 @@ class CellAdapter extends Adapter{
 
     public function QinsertCells($name, $xval, $yval){
         $stmt = $this->conn->prepare(
-            "INSERT INTO cell (Forest_name, X_coordinate, Y_coordinate)
+            "INSERT INTO Cell (Forest_name, X_coordinate, Y_coordinate)
              VALUES (?, ?, ?)"
         );
         $stmt->execute([$name, $xval, $yval]);
@@ -17,8 +17,8 @@ class CellAdapter extends Adapter{
         $species = array("Red Maple","White Oak","Pine","Black Willow","Quaking Aspen","Red Wood");
 
         $stmt = $this->conn->prepare(
-            "INSERT INTO contains_species (Species_name, numTrees, cell_id)
-             VALUES (?, ?, (SELECT id FROM cell
+            "INSERT INTO Contains_species (Species_name, numTrees, cell_id)
+             VALUES (?, ?, (SELECT id FROM Cell
              WHERE Forest_name=? AND X_coordinate=? AND Y_coordinate=?))"
            );
         for ($i=0; $i<count($species); $i++){
