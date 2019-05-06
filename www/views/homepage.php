@@ -9,7 +9,7 @@ class Homepage extends View{
         </form>
         <form action="?do=new-forest" method="post"><br>
             <input type="text" name="ForestName" placeholder="Forest Name">
-            <input type="text" name="ForestLocation" placeholder="Country">
+            <input type="text" name="ForestLocation" placeholder="Location">
             <input type="text" name="nlat" placeholder="N Border Long">
             <input type="text" name="slat" placeholder="S Border Long">
             <input type="text" name="elong" placeholder="E Border Lat">
