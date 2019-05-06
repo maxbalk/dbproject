@@ -20,9 +20,7 @@ class ClimateAdapter extends Adapter{
         while($results = $stmt->fetch(PDO::FETCH_ASSOC)){
             array_push($climates, $results);
         }
-        foreach($climates as $climate){
-            print_r($climate);
-        }
+        return $climates;
     }
 
 }
@@ -40,13 +38,7 @@ class Climate {
     } 
 
     public function getClimates(){
-        $this->adapter->QgetClimate();
-        /*
-        $climates = $this->adapter->QgetClimates();
-        foreach($climates as $climate){
-
-        }
-        */
+        return $this->adapter->QgetClimate();
     }
 }
 

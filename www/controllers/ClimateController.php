@@ -6,13 +6,7 @@ class ClimateController extends Controller{
         $climate = new Climate($adapter);
         $specadapter = new SpeciesAdapter();
         $species = new Species($specadapter);
-        $climate->getClimates();
-        $species->getSpecies();
-        //$this->view->getContent();
-    }
-
-    public function displaySpecies(){
-        $this->view->getContent();
+        $this->view->displayClimates($climate->getClimates(), $species->getSpecies());
     }
 
     public function seedSpecies(){

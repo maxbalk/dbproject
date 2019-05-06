@@ -14,15 +14,16 @@ class SpeciesAdapter extends Adapter{
     }
 
     public function  QgetSpecies(){
-        $stmt = $this->conn->prepare("select * from Tree_species");
+        $stmt = $this->conn->prepare(
+            "SELECT Scientific_name, Lifespan, Fire_tolerance, DBH 
+             FROM Tree_species"
+        );
         $stmt->execute();
         $species = array();
         while($results = $stmt->fetch(PDO::FETCH_ASSOC)){
             array_push($species, $results);
         }
-        foreach($species as $tree){
-            print_r($tree);
-        }
+        return $species;
     }
 }
 
@@ -39,7 +40,7 @@ class Species {
     }
 
     public function getSpecies(){
-        $this->adapter->QgetSpecies();
+        return $this->adapter->QgetSpecies();
     }
 
 }
