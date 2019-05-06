@@ -33,10 +33,10 @@ class CellAdapter extends Adapter{
          FROM Contains_species, Cell
          WHERE id = cell_id AND Species_name = ? AND Forest_name = ? AND numTrees
          IN (SELECT MAX(numTrees) 
-             FROM Contains_species
-             WHERE Species_name = ?)"
+             FROM Contains_species, Cell
+             WHERE Species_name = ? AND Forest_name = ? AND cell_id = id)"
       );
-      $stmt->execute([$speciesName, $forestName, $speciesName]);
+      $stmt->execute([$speciesName, $forestName, $speciesName, $forestName]);
 
       $numTrees = array();
       while($results = $stmt->fetch(PDO::FETCH_ASSOC)){
